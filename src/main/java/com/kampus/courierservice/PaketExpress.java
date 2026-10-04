@@ -38,11 +38,17 @@ public class PaketExpress extends Paket {
     @Override
     public void infoPaket() {
         System.out.println("=======================================================================================================================================================================================================================================");
-        System.out.printf("Paket Express | Nama Pengirim: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s  | Estimasi Jam: %2d jam%n", getNamaPengirim(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getEstimasiJam());
+        System.out.printf("Paket Express | Nama Penerima: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s  | Estimasi Jam: %2d jam%n", getNamaPengirim(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getEstimasiJam());
         System.out.println("=======================================================================================================================================================================================================================================");
         System.out.println();
         System.out.println("Biaya pengiriman: Rp" + hitungBiaya());
         System.out.println("Paket terdaftar: " + Paket.paketTerdaftar);
         System.out.println();
+    }
+    
+    @Override
+    public void prosesPengiriman(){
+        System.out.println("Paket express dikirim dengan mobil prioritas atau melalui jalur udara.\n");
+        System.out.println("=======================================================================================================================================================================================================================================\n");
     }
 }

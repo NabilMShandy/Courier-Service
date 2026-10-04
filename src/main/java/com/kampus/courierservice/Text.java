@@ -32,6 +32,15 @@ public class Text {
         System.out.println("1. Paket Reguler");
         System.out.println("2. Paket Express");
         System.out.println("3. Paket Same Day");
-        System.out.print("Pilih 1-3: ");
+        System.out.println("4. Paket Internasional");
+        System.out.print("Pilih 1-4: ");
+    }
+
+    public static void menuCariPaket() {
+        System.out.println("**** CARI PAKET ****");
+        System.out.println("1. Cari berdasarkan tujuan");
+        System.out.println("2. Cari berdasarkan berat");
+        System.out.println("3. Cari berdasarkan resi");
+        System.out.print("Pilih opsi pencarian: ");
     }
 }

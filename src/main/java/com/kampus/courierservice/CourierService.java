@@ -10,8 +10,16 @@ import java.util.Scanner;
  * @author NABIL MUHAMMAD S
  */
 public class CourierService {
+    
+    //    Runtime polymorphism
+    public static void prosesPengirimanBarang(Paket barang){
+        barang.prosesPengiriman();
+    }
+    
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        
+        //     Superclass yang polymorphism
         Paket[] paketBarang = new Paket[5];
 
         // Penerapan struktur dasar java
@@ -136,10 +144,44 @@ public class CourierService {
                                 } else {
                                     System.out.println("Salah input berat atau jarak!");
                                 }
-                            }
-                            else{
+                            } else {
                                 System.out.println("Tidak satu provinsi sehingga pengiriman same day tidak bisa dilakukan!");
                             }
+                        } else if (pilihanPaket == 4) {
+                            System.out.print("Masukkan nama penerima: ");
+                            String namaPenerima = scan.nextLine();
+
+                            System.out.print("Masukkan tujuan negara: ");
+                            String tujuanKirim = scan.nextLine();
+
+                            System.out.print("Masukkan berat (Kg) paket: ");
+                            double beratPaket = scan.nextDouble();
+                            scan.nextLine();
+
+                            System.out.print("Masukkan resi paket: ");
+                            String resiBarang = scan.nextLine();
+
+                            System.out.print("Masukkan nama kurir: ");
+                            String kurir = scan.nextLine();
+
+                            System.out.print("Masukkan nama ekspedisi: ");
+                            String ekspedisi = scan.nextLine();
+
+                            System.out.print("Masukkan biaya cukai: ");
+                            double beaCukai = scan.nextDouble();
+                            scan.nextLine();
+
+                            if (beratPaket > 0 && beaCukai > 0) {
+                                paketBarang[jumlahPaketSekarang]
+                                        = new PaketInternasional(namaPenerima, tujuanKirim, beratPaket, resiBarang,
+                                                kurir, ekspedisi, beaCukai);
+                                jumlahPaketSekarang++;
+                                System.out.println("Berhasil ditambahkan!");
+
+                            } else {
+                                System.out.println("Input berat atau bea cukai salah!");
+                            }
+
                         }
                     } else {
                         System.out.println("Pengiriman sedang penuh!");
@@ -153,16 +195,15 @@ public class CourierService {
                     } else {
                         for (int i = 0; i < jumlahPaketSekarang; i++) {
                             paketBarang[i].infoPaket();
+                            
+                            // Pemanggilan runtime polimorphism, method akan dipanggil sesuai dari subclass yang lebih spesifik
+                            prosesPengirimanBarang(paketBarang[i]);
                         }
                     }
-
                     break;
 
                 case 3:
-                    System.out.println("**** CARI PAKET ****");
-                    System.out.println("1. Cari berdasarkan tujuan");
-                    System.out.println("2. Cari berdasarkan berat");
-                    System.out.print("Pilih opsi pencarian: ");
+                    Text.menuCariPaket();
                     int opsiCari = scan.nextInt();
                     scan.nextLine();
 
@@ -176,6 +217,14 @@ public class CourierService {
                         double beratPaketDicari = scan.nextDouble();
                         scan.nextLine();
                         temukanPaket.cari(beratPaketDicari, paketBarang, jumlahPaketSekarang);
+                    }
+                    else if(opsiCari == 3){
+                        System.out.print("Resi paket yang dicari: ");
+                        String resiCari = scan.nextLine();
+                        
+                        System.out.print("Tujuan paket: ");
+                        String tujuanPaket = scan.nextLine();
+                        temukanPaket.car(resiCari, paketBarang, jumlahPaketSekarang, tujuanPaket);
                     }
                     break;
 

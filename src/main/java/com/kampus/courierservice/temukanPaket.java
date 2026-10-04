@@ -26,7 +26,7 @@ public class temukanPaket {
         if (!ketemu) {System.out.println("Paket dengan tujuan " + tujuan + " tidak ditemukan!");}
     }
 
-//    Overloading method cari
+    //    Overloading method cari
     public static void cari(double berat, Paket[] cariPaket, int jumlahPaketTerdaftar) {
         boolean ketemu = false;
         for (int i = 0; i < jumlahPaketTerdaftar; i++) {
@@ -36,5 +36,21 @@ public class temukanPaket {
             }
         }
         if (!ketemu) {System.out.println("Paket dengan berat " + berat + " Kg tidak ditemukan!");}
+    }
+    
+    //    Method cari paling spesifik berdasarkan resi
+    public static void car(String resi, Paket[] cariPaket, int jumlahPaketTerdaftar, String tujuan){
+        System.out.println("Mencari paket dengan resi: " + resi);
+        
+        boolean ketemu = false;
+        
+        for(int i = 0; i < jumlahPaketTerdaftar; i++){
+            if(cariPaket[i].getKodeResi().equalsIgnoreCase(resi)){
+                cariPaket[i].infoPaket();
+                ketemu = true;
+            }
+        }
+        
+        if(!ketemu){System.out.println("Tidak ada paket dengan resi " + resi);}
     }
 }

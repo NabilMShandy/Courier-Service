@@ -89,4 +89,5 @@ public class Paket {
 //    Akan dioverride
     public void infoPaket() {}
     public double hitungBiaya(){return 0;}
+    public void prosesPengiriman(){}
 }

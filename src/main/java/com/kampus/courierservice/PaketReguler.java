@@ -22,8 +22,7 @@ public class PaketReguler extends Paket{
     public int getEstimasiHari(){
         return this.estimasiHari;
     }
-    
-    
+        
     @Override
     public double hitungBiaya(){
 //        Jika berat >= 15 Kg, mendapat diskon 80%
@@ -39,12 +38,18 @@ public class PaketReguler extends Paket{
     @Override
     public void infoPaket(){
         System.out.println("=======================================================================================================================================================================================================================================");
-        System.out.printf("Paket Reguler | Nama Pengirim: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Estimasi Hari: %2d hari%n", 
+        System.out.printf("Paket Reguler | Nama Penerima: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Estimasi Hari: %2d hari%n", 
                 getNamaPengirim(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getEstimasiHari());
         System.out.println("=======================================================================================================================================================================================================================================");
         System.out.println();
         System.out.println("Biaya pengiriman: Rp" + hitungBiaya());
         System.out.println("Paket terdaftar: " + Paket.paketTerdaftar);
         System.out.println();
+    }
+    
+    @Override
+    public void prosesPengiriman(){
+        System.out.println("Paket Reguler dikirim menggunakan mobil pengantar paket biasa dan melalui jalur laut jika berbeda provinsi.\n");
+        System.out.println("=======================================================================================================================================================================================================================================\n");
     }
 }
