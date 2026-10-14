@@ -8,7 +8,7 @@ package com.kampus.courierservice;
  *
  * @author NABIL MUHAMMAD S
  */
-public class PaketInternasional extends Paket {
+public class PaketInternasional extends Paket implements DapatDibatalkan {
 
     private double biayaCukai;
 
@@ -41,6 +41,16 @@ public class PaketInternasional extends Paket {
         System.out.println("Biaya pengiriman: Rp" + hitungBiaya());
         System.out.println("Paket terdaftar: " + Paket.paketTerdaftar);
         System.out.println();
+    }
+
+    @Override
+    public void dapatDibatalkan() {
+        System.out.println("Paket Internasional tidak dapat dibatalkan!");
+    }
+
+    @Override
+    public void deskripsiLayanan() {
+        System.out.println("Layanan paket internasional dengan tambahan biaya bea cukai.");
     }
 
     @Override

@@ -39,7 +39,7 @@ public class temukanPaket {
     }
     
     //    Method cari paling spesifik berdasarkan resi
-    public static void car(String resi, Paket[] cariPaket, int jumlahPaketTerdaftar, String tujuan){
+    public static void cari(String resi, Paket[] cariPaket, int jumlahPaketTerdaftar, String tujuan){
         System.out.println("Mencari paket dengan resi: " + resi);
         
         boolean ketemu = false;

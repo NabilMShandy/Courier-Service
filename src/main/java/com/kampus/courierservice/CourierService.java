@@ -10,15 +10,15 @@ import java.util.Scanner;
  * @author NABIL MUHAMMAD S
  */
 public class CourierService {
-    
+
     //    Runtime polymorphism
-    public static void prosesPengirimanBarang(Paket barang){
+    public static void prosesPengirimanBarang(Paket barang) {
         barang.prosesPengiriman();
     }
-    
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        
+
         //     Superclass yang polymorphism
         Paket[] paketBarang = new Paket[5];
 
@@ -68,6 +68,12 @@ public class CourierService {
                                 paketBarang[jumlahPaketSekarang]
                                         = new PaketReguler(namaPenerima, tujuanKirim, beratPaket, resiBarang,
                                                 kurir, ekspedisi, estimasi);
+
+                                // Memanggil interface untuk Paket Reguler                                      
+                                if (paketBarang[jumlahPaketSekarang] instanceof DapatDilacak) {
+                                    DapatDilacak barang = (DapatDilacak) paketBarang[jumlahPaketSekarang];
+                                    barang.lacakPaket(resiBarang);
+                                }
                                 jumlahPaketSekarang++;
                                 System.out.println("Berhasil ditambahkan!");
 
@@ -102,8 +108,16 @@ public class CourierService {
                             if (beratPaket > 0 && estimasiJam > 0) {
                                 paketBarang[jumlahPaketSekarang] = new PaketExpress(namaPenerima, tujuanKirim, beratPaket,
                                         resiBarang, kurir, ekspedisi, estimasiJam);
+
+                                // Memanggil interface untuk Paket Express                     
+                                if (paketBarang[jumlahPaketSekarang] instanceof DapatDilacak) {
+                                    DapatDilacak barang = (DapatDilacak) paketBarang[jumlahPaketSekarang];
+                                    barang.lacakPaket(resiBarang);
+                                }
+
                                 jumlahPaketSekarang++;
                                 System.out.println("Berhasil ditambahkan!");
+
                             } else {
                                 System.out.println("Input berat atau estimasi jam salah!");
                             }
@@ -139,6 +153,12 @@ public class CourierService {
                                 if (beratPaket > 0 && jarakPenerima > 0) {
                                     paketBarang[jumlahPaketSekarang] = new PaketSameDay(namaPenerima, tujuanKirim, beratPaket, resiBarang,
                                             kurir, ekspedisi, jarakPenerima, satuDomisili);
+                                    
+                                    // Memanggil interface Paket Same Day                                    
+                                    if (paketBarang[jumlahPaketSekarang] instanceof DapatDilacak) {
+                                        DapatDilacak barang = (DapatDilacak) paketBarang[jumlahPaketSekarang];
+                                        barang.lacakPaket(resiBarang);
+                                    }
                                     jumlahPaketSekarang++;
                                     System.out.println("Berhasil ditambahkan!");
                                 } else {
@@ -175,11 +195,12 @@ public class CourierService {
                                 paketBarang[jumlahPaketSekarang]
                                         = new PaketInternasional(namaPenerima, tujuanKirim, beratPaket, resiBarang,
                                                 kurir, ekspedisi, beaCukai);
+
                                 jumlahPaketSekarang++;
                                 System.out.println("Berhasil ditambahkan!");
 
                             } else {
-                                System.out.println("Input berat atau bea cukai salah!");
+                                System.out.println("Input berat atau beacukai salah!");
                             }
 
                         }
@@ -195,9 +216,16 @@ public class CourierService {
                     } else {
                         for (int i = 0; i < jumlahPaketSekarang; i++) {
                             paketBarang[i].infoPaket();
-                            
+
                             // Pemanggilan runtime polimorphism, method akan dipanggil sesuai dari subclass yang lebih spesifik
                             prosesPengirimanBarang(paketBarang[i]);
+
+                            // Memanggil interface DapatDibatalkan dan DapatDilacak
+                            paketBarang[i].deskripsiLayanan();
+                            if (paketBarang[i] instanceof DapatDibatalkan) {
+                                DapatDibatalkan barang = (DapatDibatalkan) paketBarang[i];
+                                barang.dapatDibatalkan();
+                            }
                         }
                     }
                     break;
@@ -217,14 +245,14 @@ public class CourierService {
                         double beratPaketDicari = scan.nextDouble();
                         scan.nextLine();
                         temukanPaket.cari(beratPaketDicari, paketBarang, jumlahPaketSekarang);
-                    }
-                    else if(opsiCari == 3){
+                    } else if (opsiCari == 3) {
                         System.out.print("Resi paket yang dicari: ");
                         String resiCari = scan.nextLine();
-                        
+
                         System.out.print("Tujuan paket: ");
                         String tujuanPaket = scan.nextLine();
-                        temukanPaket.car(resiCari, paketBarang, jumlahPaketSekarang, tujuanPaket);
+                        temukanPaket.cari(resiCari, paketBarang, jumlahPaketSekarang, tujuanPaket);
+
                     }
                     break;
 

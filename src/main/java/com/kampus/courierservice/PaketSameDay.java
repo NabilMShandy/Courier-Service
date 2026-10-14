@@ -9,7 +9,7 @@ package com.kampus.courierservice;
  * @author NABIL MUHAMMAD S
  */
 // Inhertance dari Paket
-public class PaketSameDay extends Paket {
+public class PaketSameDay extends Paket implements DapatDilacak, DapatDibatalkan {
 
     private int jarakEkspedisi;
     private boolean satuKota;
@@ -34,14 +34,12 @@ public class PaketSameDay extends Paket {
 //        Jika satu kota dengan ekspedisi dan jarak ekspedisi <= 10 dan > 0 hitung tarif same day dikali berat
         if (isSatuKota() && jarakEkspedisi <= 10 && jarakEkspedisi > 0) {
             return tarifSameDay * getBerat();
-            
-        } 
-        
-//        kalo jaraknya antara 10 sampe 15 km, tarif same day dikali berat + tarif same day
+
+        } //        kalo jaraknya antara 10 sampe 15 km, tarif same day dikali berat + tarif same day
         else if (isSatuKota() && jarakEkspedisi > 10 && jarakEkspedisi <= 15) {
             return tarifSameDay * getBerat() + tarifSameDay;
         }
-        
+
 //        Kalau kedua kondisi diatas false, yang dijalanin ini
         return tarifSameDay * getBerat() + (0.5 * tarifSameDay);
     }
@@ -57,11 +55,29 @@ public class PaketSameDay extends Paket {
         System.out.println("Paket terdaftar: " + Paket.paketTerdaftar);
         System.out.println();
     }
-    
+
     @Override
-    public void prosesPengiriman(){
+    public void prosesPengiriman() {
         System.out.println("Paket same day dikirim dengan mobil kargo prioritas dan tercepat dan akan tiba kurang dari 12 jam.\n");
         System.out.println("=======================================================================================================================================================================================================================================\n");
     }
 
+    @Override
+    public void lacakPaket(String resi) {
+        System.out.println("\n========== PELACAKAN PAKET ==========");
+        System.out.println("Nomor Resi : " + getKodeResi());
+        System.out.println("Status     : Paket sedang diantar dengan kendaraan prioritas tercepat.");
+        System.out.println("Informasi  : Paket Same Day dapat dilacak secara real-time melalui menu khusus di aplikasi.");
+        System.out.println("=====================================");
+    }
+
+    @Override
+    public void deskripsiLayanan() {
+        System.out.println("Layanan premium dengan waktu paket tiba tercepat dengan syarat dan ketentuan berlaku.");
+    }
+
+    @Override
+    public void dapatDibatalkan() {
+        System.out.println("Paket same day tidak dapat dibatalkan!");
+    }
 }

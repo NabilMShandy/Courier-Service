@@ -9,7 +9,8 @@ package com.kampus.courierservice;
  * @author NABIL MUHAMMAD S
  */
 // Superclass
-public class Paket {
+public abstract class Paket {
+
     // Encapsulation
     private String namaPenerima;
     private String tujuan;
@@ -47,7 +48,7 @@ public class Paket {
             System.out.println("Berat yang dimasukkan salah!");
         }
     }
-    
+
 //    Setter
     public void setResi(String resi) {
         this.resi = resi;
@@ -87,7 +88,11 @@ public class Paket {
     }
 
 //    Akan dioverride
-    public void infoPaket() {}
-    public double hitungBiaya(){return 0;}
-    public void prosesPengiriman(){}
+    public abstract void infoPaket();
+
+    public abstract double hitungBiaya();
+
+    public abstract void prosesPengiriman();
+
+    public abstract void deskripsiLayanan();
 }

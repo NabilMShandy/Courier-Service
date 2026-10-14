@@ -9,7 +9,7 @@ package com.kampus.courierservice;
  * @author NABIL MUHAMMAD S
  */
 // Inhertance dari Paket
-public class PaketExpress extends Paket {
+public class PaketExpress extends Paket implements DapatDilacak {
 
     private int estimasiJam;
     protected final static double tarifExpress = 8000;
@@ -18,18 +18,17 @@ public class PaketExpress extends Paket {
         super(namaPenerima, tujuan, berat, resi, namaKurir, namaEkspedisi);
         this.estimasiJam = estimasiJam;
     }
-    
-    public int getEstimasiJam(){
+
+    public int getEstimasiJam() {
         return this.estimasiJam;
     }
-    
+
     @Override
     public double hitungBiaya() {
-    //  Jika berat > 15 Kg, berat sekarang dikurangi 15 lalu dikali tarif express
+        //  Jika berat > 15 Kg, berat sekarang dikurangi 15 lalu dikali tarif express
         if (getBerat() > 15) {
             return (getBerat() * this.tarifExpress) + ((getBerat() - 15) * this.tarifExpress);
-        }
-    // dibawah atau sama dengan 15, berat dikali tarif express
+        } // dibawah atau sama dengan 15, berat dikali tarif express
         else {
             return getBerat() * this.tarifExpress;
         }
@@ -45,10 +44,24 @@ public class PaketExpress extends Paket {
         System.out.println("Paket terdaftar: " + Paket.paketTerdaftar);
         System.out.println();
     }
-    
+
     @Override
-    public void prosesPengiriman(){
+    public void prosesPengiriman() {
         System.out.println("Paket express dikirim dengan mobil prioritas atau melalui jalur udara.\n");
         System.out.println("=======================================================================================================================================================================================================================================\n");
+    }
+
+    @Override
+    public void lacakPaket(String resi) {
+        System.out.println("\n========== PELACAKAN PAKET ==========");
+        System.out.println("Nomor Resi : " + getKodeResi());
+        System.out.println("Status     : Paket sedang diantar dengan kendaraan prioritas.");
+        System.out.println("Informasi  : Paket Express dapat dilacak secara real-time melalui aplikasi.");
+        System.out.println("=====================================");
+    }
+
+    @Override
+    public void deskripsiLayanan() {
+        System.out.println("Layanan Express dengan estimasi kedatangan lebih cepat.");
     }
 }

@@ -8,37 +8,36 @@ package com.kampus.courierservice;
  *
  * @author NABIL MUHAMMAD S
  */
-
 // Inhertance dari Paket
-public class PaketReguler extends Paket{
+public class PaketReguler extends Paket implements DapatDibatalkan, DapatDilacak {
+
     private int estimasiHari;
     protected final static double tarifReguler = 5000;
-    
+
     public PaketReguler(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int estimasiHari) {
         super(namaPenerima, tujuan, berat, resi, namaKurir, namaEkspedisi);
         this.estimasiHari = estimasiHari;
     }
-    
-    public int getEstimasiHari(){
+
+    public int getEstimasiHari() {
         return this.estimasiHari;
     }
-        
+
     @Override
-    public double hitungBiaya(){
+    public double hitungBiaya() {
 //        Jika berat >= 15 Kg, mendapat diskon 80%
-        if(getBerat() >= 15){
-            return (getBerat()*this.tarifReguler) * 0.8;
-        }
-//        dibawah 15 Kg, 5000 perkilo
-        else{
+        if (getBerat() >= 15) {
+            return (getBerat() * this.tarifReguler) * 0.8;
+        } //        dibawah 15 Kg, 5000 perkilo
+        else {
             return getBerat() * this.tarifReguler;
         }
     }
-        
+
     @Override
-    public void infoPaket(){
+    public void infoPaket() {
         System.out.println("=======================================================================================================================================================================================================================================");
-        System.out.printf("Paket Reguler | Nama Penerima: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Estimasi Hari: %2d hari%n", 
+        System.out.printf("Paket Reguler | Nama Penerima: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Estimasi Hari: %2d hari%n",
                 getNamaPengirim(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getEstimasiHari());
         System.out.println("=======================================================================================================================================================================================================================================");
         System.out.println();
@@ -46,10 +45,29 @@ public class PaketReguler extends Paket{
         System.out.println("Paket terdaftar: " + Paket.paketTerdaftar);
         System.out.println();
     }
-    
+
     @Override
-    public void prosesPengiriman(){
+    public void prosesPengiriman() {
         System.out.println("Paket Reguler dikirim menggunakan mobil pengantar paket biasa dan melalui jalur laut jika berbeda provinsi.\n");
         System.out.println("=======================================================================================================================================================================================================================================\n");
+    }
+
+    @Override
+    public void deskripsiLayanan() {
+        System.out.println("Layanan reguler dengan biaya ekonomis.");
+    }
+
+    @Override
+    public void dapatDibatalkan() {
+        System.out.println("Dapat dibatalkan selagi belum diantar ekspedisi.");
+    }
+
+    @Override
+    public void lacakPaket(String resi) {
+        System.out.println("\n========== PELACAKAN PAKET ==========");
+        System.out.println("Nomor Resi : " + getKodeResi());
+        System.out.println("Status     : Paket sedang diantar menggunakan kendaraan reguler.");
+        System.out.println("Informasi  : Paket Reguler dapat dilacak secara real-time melalui aplikasi.");
+        System.out.println("=====================================");
     }
 }
