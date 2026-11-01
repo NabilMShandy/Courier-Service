@@ -22,7 +22,12 @@ public abstract class Paket {
     public static int paketTerdaftar = 0;
 
 //    Constructor
-    public Paket(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi) {
+    public Paket(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi) throws Exception {
+
+        if (berat <= 0 || resi == null || resi.trim().isEmpty()) {
+            throw new Exception("[ERROR] Terdapat kesalahan input pada berat atau resi");
+        }
+
         setNamaPengirim(namaPenerima);
         setTujuan(tujuan);
         setBerat(berat);
@@ -41,16 +46,19 @@ public abstract class Paket {
         this.tujuan = tujuan;
     }
 
-    public void setBerat(double berat) {
-        if (berat > 0) {
-            this.berat = berat;
+    public void setBerat(double berat) throws Exception {
+        if (berat <= 0) {
+            throw new Exception("Berat yang dimasukkan salah!");
         } else {
-            System.out.println("Berat yang dimasukkan salah!");
+            this.berat = berat;
         }
     }
 
 //    Setter
     public void setResi(String resi) {
+        if (resi == null || resi.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kesalahan input resi!");
+        }
         this.resi = resi;
     }
 

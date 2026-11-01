@@ -12,7 +12,12 @@ public class PaketInternasional extends Paket implements DapatDibatalkan {
 
     private double biayaCukai;
 
-    public PaketInternasional(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, double biayaCukai) {
+    public PaketInternasional(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, double biayaCukai) throws Exception{
+        
+        if(berat <= 0 || biayaCukai <= 0 || resi == null || resi.trim().isEmpty()){
+            throw new Exception("[ERROR] Input berat atau biaya cukai tidak valid!");
+        }
+        
         super(namaPenerima, tujuan, berat, resi, namaKurir, namaEkspedisi);
         setBiayaCukai(biayaCukai);
     }

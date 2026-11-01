@@ -22,9 +22,10 @@ public class Text {
         System.out.println("Silahkan gunakan menu berikut");
         System.out.println("1. Tambah Paket");
         System.out.println("2. Tampil semua paket");
-        System.out.println("3. Cari Paket");
-        System.out.println("4. Keluar");
-        System.out.print("Pilih 1-4: ");
+        System.out.println("3. Cari Paket (Custom Exception)");
+        System.out.println("4. Manajemen Pelanggan (Hash Map)");
+        System.out.println("5. Keluar");
+        System.out.print("Pilih 1-5: ");
     }
 
     public static void pilihPaket() {
@@ -36,11 +37,12 @@ public class Text {
         System.out.print("Pilih 1-4: ");
     }
 
-    public static void menuCariPaket() {
-        System.out.println("**** CARI PAKET ****");
-        System.out.println("1. Cari berdasarkan tujuan");
-        System.out.println("2. Cari berdasarkan berat");
-        System.out.println("3. Cari berdasarkan resi");
-        System.out.print("Pilih opsi pencarian: ");
+    public static void manajemenPelanggan() {
+        System.out.println("\n*** MANAJEMEN PELANGGAN ***");
+        System.out.println("1. Tambah Pelanggan Baru");
+        System.out.println("2. Cari Pelanggan Berdasarkan ID");
+        System.out.println("3. Tampilkan Semua Anggota");
+        System.out.print("Pilih : ");
+
     }
 }

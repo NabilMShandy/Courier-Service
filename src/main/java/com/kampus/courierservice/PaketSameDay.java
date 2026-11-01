@@ -15,7 +15,11 @@ public class PaketSameDay extends Paket implements DapatDilacak, DapatDibatalkan
     private boolean satuKota;
     protected final static double tarifSameDay = 12000;
 
-    public PaketSameDay(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int jarakEkspedisi, boolean satuKota) {
+    public PaketSameDay(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int jarakEkspedisi, boolean satuKota) throws Exception {
+        if(berat <= 0 || resi == null || resi.trim().isEmpty() || jarakEkspedisi <= 0 || satuKota == false){
+            throw new Exception("[ERROR] ---> Terdapat kesalahan input ");
+        }
+            
         super(namaPenerima, tujuan, berat, resi, namaKurir, namaEkspedisi);
         this.jarakEkspedisi = jarakEkspedisi;
         this.satuKota = satuKota;

@@ -4,6 +4,9 @@
 package com.kampus.courierservice;
 
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -19,24 +22,30 @@ public class CourierService {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        //     Superclass yang polymorphism
-        Paket[] paketBarang = new Paket[5];
+        // Array List
+        ArrayList<Paket> daftarPaket = new ArrayList<>();
+
+        // Hash Map
+        HashMap<String, String> dataPelanggan = new HashMap<>();
 
         // Penerapan struktur dasar java
         int jumlahPaketSekarang = 0;
         boolean isRun = true;
 
         while (isRun) {
-            Text.Header();
-            Text.Menu();
+            
+            // Implementasi try & catch            
+            try {
+                Text.Header();
+                Text.Menu();
 
-            int pilih = scan.nextInt();
-            scan.nextLine();
+                int pilih = scan.nextInt();
+                scan.nextLine();
 
-            switch (pilih) {
-                case 1:
-                    if (jumlahPaketSekarang < paketBarang.length) {
+                switch (pilih) {
+                    case 1:
                         Text.pilihPaket();
+                        
                         int pilihanPaket = scan.nextInt();
                         scan.nextLine();
 
@@ -64,22 +73,17 @@ public class CourierService {
                             int estimasi = scan.nextInt();
                             scan.nextLine();
 
-                            if (beratPaket > 0 && estimasi > 0) {
-                                paketBarang[jumlahPaketSekarang]
-                                        = new PaketReguler(namaPenerima, tujuanKirim, beratPaket, resiBarang,
-                                                kurir, ekspedisi, estimasi);
+                            daftarPaket.add(new PaketReguler(namaPenerima, tujuanKirim, beratPaket, resiBarang,
+                                    kurir, ekspedisi, estimasi));
 
-                                // Memanggil interface untuk Paket Reguler                                      
-                                if (paketBarang[jumlahPaketSekarang] instanceof DapatDilacak) {
-                                    DapatDilacak barang = (DapatDilacak) paketBarang[jumlahPaketSekarang];
-                                    barang.lacakPaket(resiBarang);
-                                }
-                                jumlahPaketSekarang++;
-                                System.out.println("Berhasil ditambahkan!");
-
-                            } else {
-                                System.out.println("Input berat atau estimasi hari salah!");
+                            // Memanggil interface untuk Paket Reguler                                      
+                            if (daftarPaket.get(jumlahPaketSekarang) instanceof DapatDilacak) {
+                                DapatDilacak barang = (DapatDilacak) daftarPaket.get(jumlahPaketSekarang);
+                                barang.lacakPaket(resiBarang);
                             }
+
+                            jumlahPaketSekarang++;
+                            System.out.println("Berhasil ditambahkan!\n");
 
                         } else if (pilihanPaket == 2) {
                             System.out.print("Masukkan nama penerima: ");
@@ -105,68 +109,56 @@ public class CourierService {
                             int estimasiJam = scan.nextInt();
                             scan.nextLine();
 
-                            if (beratPaket > 0 && estimasiJam > 0) {
-                                paketBarang[jumlahPaketSekarang] = new PaketExpress(namaPenerima, tujuanKirim, beratPaket,
-                                        resiBarang, kurir, ekspedisi, estimasiJam);
+                            daftarPaket.add(new PaketExpress(namaPenerima, tujuanKirim, beratPaket,
+                                    resiBarang, kurir, ekspedisi, estimasiJam));
 
-                                // Memanggil interface untuk Paket Express                     
-                                if (paketBarang[jumlahPaketSekarang] instanceof DapatDilacak) {
-                                    DapatDilacak barang = (DapatDilacak) paketBarang[jumlahPaketSekarang];
-                                    barang.lacakPaket(resiBarang);
-                                }
-
-                                jumlahPaketSekarang++;
-                                System.out.println("Berhasil ditambahkan!");
-
-                            } else {
-                                System.out.println("Input berat atau estimasi jam salah!");
+                            // Memanggil interface untuk Paket Express                     
+                            if (daftarPaket.get(jumlahPaketSekarang) instanceof DapatDilacak) {
+                                DapatDilacak barang = (DapatDilacak) daftarPaket.get(jumlahPaketSekarang);
+                                barang.lacakPaket(resiBarang);
                             }
+
+                            jumlahPaketSekarang++;
+                            System.out.println("Berhasil ditambahkan!\n");
 
                         } else if (pilihanPaket == 3) {
-                            System.out.println("Apakah satu kota? isi dengan true atau false");
+                            System.out.print("Apakah satu kota? isi dengan true atau false: ");
                             boolean satuDomisili = scan.nextBoolean();
 
-                            if (satuDomisili) {
-                                System.out.print("Masukkan jarak (Km) penerima dengan ekspedisi: ");
-                                int jarakPenerima = scan.nextInt();
-                                scan.nextLine();
+                            System.out.print("Masukkan jarak (Km) penerima dengan ekspedisi: ");
+                            int jarakPenerima = scan.nextInt();
+                            scan.nextLine();
 
-                                System.out.print("Masukkan nama penerima: ");
-                                String namaPenerima = scan.nextLine();
+                            System.out.print("Masukkan nama penerima: ");
+                            String namaPenerima = scan.nextLine();
 
-                                System.out.print("Masukkan tujuan: ");
-                                String tujuanKirim = scan.nextLine();
+                            System.out.print("Masukkan tujuan: ");
+                            String tujuanKirim = scan.nextLine();
 
-                                System.out.print("Masukkan berat (Kg) paket: ");
-                                double beratPaket = scan.nextDouble();
-                                scan.nextLine();
+                            System.out.print("Masukkan berat (Kg) paket: ");
+                            double beratPaket = scan.nextDouble();
+                            scan.nextLine();
 
-                                System.out.print("Masukkan resi paket: ");
-                                String resiBarang = scan.nextLine();
+                            System.out.print("Masukkan resi paket: ");
+                            String resiBarang = scan.nextLine();
 
-                                System.out.print("Masukkan nama kurir: ");
-                                String kurir = scan.nextLine();
+                            System.out.print("Masukkan nama kurir: ");
+                            String kurir = scan.nextLine();
 
-                                System.out.print("Masukkan nama ekspedisi: ");
-                                String ekspedisi = scan.nextLine();
+                            System.out.print("Masukkan nama ekspedisi: ");
+                            String ekspedisi = scan.nextLine();
 
-                                if (beratPaket > 0 && jarakPenerima > 0) {
-                                    paketBarang[jumlahPaketSekarang] = new PaketSameDay(namaPenerima, tujuanKirim, beratPaket, resiBarang,
-                                            kurir, ekspedisi, jarakPenerima, satuDomisili);
-                                    
-                                    // Memanggil interface Paket Same Day                                    
-                                    if (paketBarang[jumlahPaketSekarang] instanceof DapatDilacak) {
-                                        DapatDilacak barang = (DapatDilacak) paketBarang[jumlahPaketSekarang];
-                                        barang.lacakPaket(resiBarang);
-                                    }
-                                    jumlahPaketSekarang++;
-                                    System.out.println("Berhasil ditambahkan!");
-                                } else {
-                                    System.out.println("Salah input berat atau jarak!");
-                                }
-                            } else {
-                                System.out.println("Tidak satu provinsi sehingga pengiriman same day tidak bisa dilakukan!");
+                            daftarPaket.add(new PaketSameDay(namaPenerima, tujuanKirim, beratPaket, resiBarang,
+                                    kurir, ekspedisi, jarakPenerima, satuDomisili));
+
+                            // Memanggil interface Paket Same Day                                    
+                            if (daftarPaket.get(jumlahPaketSekarang) instanceof DapatDilacak) {
+                                DapatDilacak barang = (DapatDilacak) daftarPaket.get(jumlahPaketSekarang);
+                                barang.lacakPaket(resiBarang);
                             }
+                            jumlahPaketSekarang++;
+                            System.out.println("Berhasil ditambahkan!");
+
                         } else if (pilihanPaket == 4) {
                             System.out.print("Masukkan nama penerima: ");
                             String namaPenerima = scan.nextLine();
@@ -191,77 +183,100 @@ public class CourierService {
                             double beaCukai = scan.nextDouble();
                             scan.nextLine();
 
-                            if (beratPaket > 0 && beaCukai > 0) {
-                                paketBarang[jumlahPaketSekarang]
-                                        = new PaketInternasional(namaPenerima, tujuanKirim, beratPaket, resiBarang,
-                                                kurir, ekspedisi, beaCukai);
+                            daftarPaket.add(new PaketInternasional(namaPenerima, tujuanKirim, beratPaket, resiBarang,
+                                    kurir, ekspedisi, beaCukai));
 
-                                jumlahPaketSekarang++;
-                                System.out.println("Berhasil ditambahkan!");
-
-                            } else {
-                                System.out.println("Input berat atau beacukai salah!");
-                            }
+                            jumlahPaketSekarang++;
+                            System.out.println("Berhasil ditambahkan!\n");
 
                         }
-                    } else {
-                        System.out.println("Pengiriman sedang penuh!");
-                    }
+                        break;
 
-                    break;
+                    case 2:
+                        if (daftarPaket.isEmpty()) {
+                            System.out.println("Tidak ada paket terdaftar!");
+                        } else {
+                            for (int i = 0; i < daftarPaket.size(); i++) {
+                                daftarPaket.get(i).infoPaket();
 
-                case 2:
-                    if (jumlahPaketSekarang == 0) {
-                        System.out.println("Tidak ada paket terdaftar!");
-                    } else {
-                        for (int i = 0; i < jumlahPaketSekarang; i++) {
-                            paketBarang[i].infoPaket();
+                                // Pemanggilan runtime polymorphism, method akan dipanggil sesuai dari subclass yang lebih spesifik
+                                prosesPengirimanBarang(daftarPaket.get(i));
 
-                            // Pemanggilan runtime polimorphism, method akan dipanggil sesuai dari subclass yang lebih spesifik
-                            prosesPengirimanBarang(paketBarang[i]);
-
-                            // Memanggil interface DapatDibatalkan dan DapatDilacak
-                            paketBarang[i].deskripsiLayanan();
-                            if (paketBarang[i] instanceof DapatDibatalkan) {
-                                DapatDibatalkan barang = (DapatDibatalkan) paketBarang[i];
-                                barang.dapatDibatalkan();
+                                // Memanggil interface DapatDibatalkan dan DapatDilacak
+                                daftarPaket.get(i).deskripsiLayanan();
+                                if (daftarPaket.get(i) instanceof DapatDibatalkan) {
+                                    DapatDibatalkan barang = (DapatDibatalkan) daftarPaket.get(i);
+                                    barang.dapatDibatalkan();
+                                }
                             }
                         }
-                    }
-                    break;
+                        break;
 
-                case 3:
-                    Text.menuCariPaket();
-                    int opsiCari = scan.nextInt();
-                    scan.nextLine();
+                    case 3:
+                        try {
+                            System.out.println("\n ----- CARI KOLEKSI -----");
+                            System.out.print("Masukkan kode resi paket : ");
+                            String kodeResiDicari = scan.nextLine();
+                            temukanPaket.cari(kodeResiDicari, daftarPaket);
+                            
+                        } catch (PaketTidakDitemukanException e) {
+                            System.out.println("WARNING : " + e.getMessage());
+                            
+                        } finally {
+                            System.out.println("---> Pencarian selesai <----");
+                        }
+                        break;
 
-                    if (opsiCari == 1) {
-                        System.out.print("Masukkan tujuan paket yang dicari: ");
-                        String tujuanDicari = scan.nextLine();
-                        temukanPaket.cari(tujuanDicari, paketBarang, jumlahPaketSekarang);
-
-                    } else if (opsiCari == 2) {
-                        System.out.print("Masukkan berat (Kg) paket yang dicari: ");
-                        double beratPaketDicari = scan.nextDouble();
+                    case 4:
+                        Text.manajemenPelanggan();
+                        int menuPelanggan = scan.nextInt();
                         scan.nextLine();
-                        temukanPaket.cari(beratPaketDicari, paketBarang, jumlahPaketSekarang);
-                    } else if (opsiCari == 3) {
-                        System.out.print("Resi paket yang dicari: ");
-                        String resiCari = scan.nextLine();
+                        
+                        if(menuPelanggan == 1){
+                            System.out.print("Masukkan ID Pelanggan: ");
+                            String idPelanggan = scan.nextLine();
+                            System.out.print("Masukkan Nama Pelanggan: ");
+                            String namaPelanggan = scan.nextLine();
+                            
+                            dataPelanggan.put(idPelanggan, namaPelanggan);
+                            System.out.println("Pelanggan berhasil ditambahkan!");
+                        }
+                        else if(menuPelanggan == 2){
+                            System.out.print("Masukkan ID Pelanggan yang dicari: ");
+                            String idCari = scan.nextLine();
+                            
+                            if(dataPelanggan.containsKey(idCari)){
+                                System.out.println("ID " + idCari + " ditemukan!");
+                                System.out.println("Nama: " + dataPelanggan.get(idCari));
+                            }
+                            else{
+                                System.out.println("Pelanggan tersebut tidak terdaftar!");
+                            }
+                            
+                        }
+                        else if(menuPelanggan == 3){
+                            System.out.println("Pelanggan terdaftar: " + dataPelanggan.size());
+                            
+                            System.out.println("==== Menampilkan Seluruh Anggota ====");
+                            for(String keyID : dataPelanggan.keySet()){
+                                System.out.println("ID " + keyID + " | Nama: " + dataPelanggan.get(keyID));
+                            }
+                        }             
+                        break;
 
-                        System.out.print("Tujuan paket: ");
-                        String tujuanPaket = scan.nextLine();
-                        temukanPaket.cari(resiCari, paketBarang, jumlahPaketSekarang, tujuanPaket);
+                    case 5:
+                        System.out.println("Keluar...");
+                        isRun = false;
+                        break;
 
-                    }
-                    break;
-
-                case 4:
-                    System.out.println("Keluar...");
-                    isRun = false;
-                    break;
-                default:
-                    System.out.println("Masukan tidak valid!");
+                    default:
+                        System.out.println("Masukan tidak valid!");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\n[ERROR] Input tidak valid! Anda harus memasukkan angka!");
+                scan.nextLine();
+            } catch (Exception e) {
+                System.out.println("\n[SYSTEM ERROR] Terjadi kegagalan: " + e.getMessage());
             }
         }
         scan.close();

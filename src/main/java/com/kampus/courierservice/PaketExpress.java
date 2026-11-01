@@ -14,7 +14,11 @@ public class PaketExpress extends Paket implements DapatDilacak {
     private int estimasiJam;
     protected final static double tarifExpress = 8000;
 
-    public PaketExpress(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int estimasiJam) {
+    public PaketExpress(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int estimasiJam) throws Exception{
+        if(berat <= 0 || estimasiJam <= 0 || resi == null || resi.trim().isEmpty()){
+            throw new Exception(" [ERROR] Terdapat kesalahan input pada berat atau estimasi jam!");
+        }
+        
         super(namaPenerima, tujuan, berat, resi, namaKurir, namaEkspedisi);
         this.estimasiJam = estimasiJam;
     }

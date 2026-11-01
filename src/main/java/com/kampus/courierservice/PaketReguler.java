@@ -14,7 +14,10 @@ public class PaketReguler extends Paket implements DapatDibatalkan, DapatDilacak
     private int estimasiHari;
     protected final static double tarifReguler = 5000;
 
-    public PaketReguler(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int estimasiHari) {
+    public PaketReguler(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int estimasiHari) throws Exception {
+        if(berat <= 0 || estimasiHari <= 0 || resi == null || resi.trim().isEmpty()){
+            throw new Exception("[ERROR] Input berat atau estimasi hari tidak valid!");
+        }
         super(namaPenerima, tujuan, berat, resi, namaKurir, namaEkspedisi);
         this.estimasiHari = estimasiHari;
     }
@@ -59,7 +62,7 @@ public class PaketReguler extends Paket implements DapatDibatalkan, DapatDilacak
 
     @Override
     public void dapatDibatalkan() {
-        System.out.println("Dapat dibatalkan selagi belum diantar ekspedisi.");
+        System.out.println("Dapat dibatalkan selagi belum diantar ekspedisi.\n");
     }
 
     @Override
