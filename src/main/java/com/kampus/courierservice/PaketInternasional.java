@@ -39,8 +39,8 @@ public class PaketInternasional extends Paket implements DapatDibatalkan {
     @Override
     public void infoPaket() {
         System.out.println("=======================================================================================================================================================================================================================================");
-        System.out.printf("Paket Internasional | Nama Penerima: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Biaya Cukai: %.2f Rp%n",
-                getNamaPengirim(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getBiayaCukai());
+        System.out.printf("Paket Internasional | ID Pelanggan: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Biaya Cukai: %.2f Rp%n",
+                getIdPelanggan(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getBiayaCukai());
         System.out.println("=======================================================================================================================================================================================================================================");
         System.out.println();
         System.out.println("Biaya pengiriman: Rp" + hitungBiaya());

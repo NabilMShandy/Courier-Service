@@ -51,8 +51,8 @@ public class PaketSameDay extends Paket implements DapatDilacak, DapatDibatalkan
     @Override
     public void infoPaket() {
         System.out.println("=======================================================================================================================================================================================================================================");
-        System.out.printf("Paket Same Day | Nama Penerima: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Jarak Ekspedisi: %2d Km%n",
-                getNamaPengirim(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getJarakEkspedisi());
+        System.out.printf("Paket Same Day | ID Pelanggan: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Jarak Ekspedisi: %2d Km%n",
+                getIdPelanggan(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getJarakEkspedisi());
         System.out.println("=======================================================================================================================================================================================================================================");
         System.out.println();
         System.out.println("Biaya pengiriman: Rp" + hitungBiaya());

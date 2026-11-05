@@ -14,11 +14,11 @@ public class PaketReguler extends Paket implements DapatDibatalkan, DapatDilacak
     private int estimasiHari;
     protected final static double tarifReguler = 5000;
 
-    public PaketReguler(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int estimasiHari) throws Exception {
+    public PaketReguler(String idPelanggan, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi, int estimasiHari) throws Exception {
         if(berat <= 0 || estimasiHari <= 0 || resi == null || resi.trim().isEmpty()){
             throw new Exception("[ERROR] Input berat atau estimasi hari tidak valid!");
         }
-        super(namaPenerima, tujuan, berat, resi, namaKurir, namaEkspedisi);
+        super(idPelanggan, tujuan, berat, resi, namaKurir, namaEkspedisi);
         this.estimasiHari = estimasiHari;
     }
 
@@ -40,8 +40,8 @@ public class PaketReguler extends Paket implements DapatDibatalkan, DapatDilacak
     @Override
     public void infoPaket() {
         System.out.println("=======================================================================================================================================================================================================================================");
-        System.out.printf("Paket Reguler | Nama Penerima: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Estimasi Hari: %2d hari%n",
-                getNamaPengirim(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getEstimasiHari());
+        System.out.printf("Paket Reguler | ID Pelanggan: %-20s | Tujuan: %-20s | Berat: %.2f kg | Resi: %-18s | Nama Kurir: %-15s | Nama Ekspedisi: %-15s | Estimasi Hari: %2d hari%n",
+                getIdPelanggan(), getTujuan(), getBerat(), getKodeResi(), getNamaKurir(), getNamaEkspedisi(), getEstimasiHari());
         System.out.println("=======================================================================================================================================================================================================================================");
         System.out.println();
         System.out.println("Biaya pengiriman: Rp" + hitungBiaya());

@@ -12,7 +12,7 @@ package com.kampus.courierservice;
 public abstract class Paket {
 
     // Encapsulation
-    private String namaPenerima;
+    private String idPelanggan;
     private String tujuan;
     private double berat;
     private String resi;
@@ -22,13 +22,13 @@ public abstract class Paket {
     public static int paketTerdaftar = 0;
 
 //    Constructor
-    public Paket(String namaPenerima, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi) throws Exception {
+    public Paket(String idPelanggan, String tujuan, double berat, String resi, String namaKurir, String namaEkspedisi) throws Exception {
 
         if (berat <= 0 || resi == null || resi.trim().isEmpty()) {
             throw new Exception("[ERROR] Terdapat kesalahan input pada berat atau resi");
         }
 
-        setNamaPengirim(namaPenerima);
+        setIdPenerima(idPelanggan);
         setTujuan(tujuan);
         setBerat(berat);
         setResi(resi);
@@ -38,8 +38,8 @@ public abstract class Paket {
     }
 
 //    Setter
-    public void setNamaPengirim(String namaPenerima) {
-        this.namaPenerima = namaPenerima;
+    public void setIdPenerima(String idPelanggan) {
+        this.idPelanggan = idPelanggan;
     }
 
     public void setTujuan(String tujuan) {
@@ -71,8 +71,8 @@ public abstract class Paket {
     }
 
 //    Getter
-    public String getNamaPengirim() {
-        return this.namaPenerima;
+    public String getIdPelanggan() {
+        return this.idPelanggan;
     }
 
     public String getTujuan() {
